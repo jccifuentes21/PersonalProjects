@@ -18,28 +18,36 @@ public class ledController {
     @RequestMapping("/blink")
     public String light() throws InterruptedException {
 
+        int i = 0;
+
         GpioController gpio = GpioFactory.getInstance();
 
-        final GpioPinDigitalOutput pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_04, "Led4", PinState.HIGH);
+        final GpioPinDigitalOutput pin1 = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_00, "Led4", PinState.HIGH);
+        final GpioPinDigitalOutput pin2 = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_02, "Led4", PinState.LOW);
+        final GpioPinDigitalOutput pin3 = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_03, "Led4", PinState.HIGH);
+        final GpioPinDigitalOutput pin4 = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_04, "Led4", PinState.LOW);
+        final GpioPinDigitalOutput pin5 = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_05, "Led4", PinState.HIGH);
+        final GpioPinDigitalOutput pin6 = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_06, "Led4", PinState.LOW);;
 
-        Thread.sleep(1000);
-        pin.low();
-        Thread.sleep(1000);
-        pin.high();
-        Thread.sleep(1000);
-        pin.low();
-        Thread.sleep(500);
-        pin.high();
-        Thread.sleep(500);
-        pin.low();
-        Thread.sleep(500);
-        pin.high();
-        Thread.sleep(500);
-        pin.low();
+        if (i!=0) {
+            Thread.sleep(1000);
+            pin.low();
+            Thread.sleep(1000);
+            pin.high();
+            Thread.sleep(1000);
+            pin.low();
+            Thread.sleep(500);
+            pin.high();
+            Thread.sleep(500);
+            pin.low();
+            Thread.sleep(500);
+            pin.high();
+            Thread.sleep(500);
+            pin.low();
 
-        gpio.shutdown();
-        gpio.unprovisionPin(pin);
-
+            gpio.shutdown();
+            gpio.unprovisionPin(pin);
+        }
         return "program was executed without errors";
 
     }
