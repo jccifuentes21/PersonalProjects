@@ -22,12 +22,12 @@ public class ledController {
 
         GpioController gpio = GpioFactory.getInstance();
 
-        final GpioPinDigitalOutput pin1 = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_00, "Led4", PinState.HIGH);
-        final GpioPinDigitalOutput pin2 = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_02, "Led4", PinState.LOW);
-        final GpioPinDigitalOutput pin3 = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_03, "Led4", PinState.HIGH);
+        final GpioPinDigitalOutput pin1 = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_00, "Led1", PinState.HIGH);
+        final GpioPinDigitalOutput pin2 = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_02, "Led2", PinState.LOW);
+        final GpioPinDigitalOutput pin3 = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_03, "Led3", PinState.HIGH);
         final GpioPinDigitalOutput pin4 = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_04, "Led4", PinState.LOW);
-        final GpioPinDigitalOutput pin5 = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_05, "Led4", PinState.HIGH);
-        final GpioPinDigitalOutput pin6 = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_06, "Led4", PinState.LOW);;
+        final GpioPinDigitalOutput pin5 = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_05, "Led5", PinState.HIGH);
+        final GpioPinDigitalOutput pin6 = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_06, "Led6", PinState.LOW);
 
         if (i!=0) {
             Thread.sleep(1000);
@@ -45,9 +45,15 @@ public class ledController {
             Thread.sleep(500);
             pin.low();
 
-            gpio.shutdown();
-            gpio.unprovisionPin(pin);
+
         }
+        gpio.shutdown();
+        gpio.unprovisionPin(pin1);
+        gpio.unprovisionPin(pin2);
+        gpio.unprovisionPin(pin3);
+        gpio.unprovisionPin(pin4);
+        gpio.unprovisionPin(pin5);
+        gpio.unprovisionPin(pin6);
         return "program was executed without errors";
 
     }
