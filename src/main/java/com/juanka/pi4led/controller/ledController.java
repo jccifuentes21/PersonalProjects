@@ -3,7 +3,9 @@ package com.juanka.pi4led.controller;
 
 import com.pi4j.io.gpio.*;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
+@RestController
 public class ledController {
 
     private static GpioPinDigitalOutput pin;
