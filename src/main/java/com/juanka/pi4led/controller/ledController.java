@@ -37,6 +37,9 @@ public class ledController {
         Thread.sleep(500);
         pin.low();
 
+        gpio.shutdown();
+        gpio.unprovisionPin(pin);
+
         return "program was executed without errors";
 
     }
