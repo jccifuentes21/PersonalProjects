@@ -19,19 +19,14 @@ public class ledController {
 
         a.high();
         Thread.sleep(600);
-        a.low();
-        b.high();
+        a.low(); b.high();
         Thread.sleep(400);
-        b.low();
-        c.high();
+        b.low(); c.high();
         Thread.sleep(400);
-        c.low();
-        d.high();
+        c.low(); d.high();
         Thread.sleep(400);
-        d.low();
-        e.high();
+        d.low(); e.high();
         Thread.sleep(600);
-        e.low();
 
     }
 
@@ -39,20 +34,14 @@ public class ledController {
 
         e.high();
         Thread.sleep(600);
-        e.low();
-        d.high();
+        e.low(); d.high();
         Thread.sleep(400);
-        d.low();
-        c.high();
+        d.low(); c.high();
         Thread.sleep(400);
-        c.low();
-        b.high();
+        c.low(); b.high();
         Thread.sleep(400);
-        b.low();
-        a.high();
+        b.low(); a.high();
         Thread.sleep(600);
-        a.low();
-
     }
 
     public static void shutdown (){
@@ -71,14 +60,16 @@ public class ledController {
         final GpioPinDigitalOutput pin4 = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_05, "Led5", PinState.LOW);
         final GpioPinDigitalOutput pin5 = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_06, "Led6", PinState.LOW);
 
-        while (i<=5){
+        while (i<=5) {
 
             right(pin1, pin2, pin3, pin4, pin5);
             left(pin1, pin2, pin3, pin4, pin5);
 
             i++;
         }
+
         gpio.shutdown();
+
         gpio.unprovisionPin(pin1);
         gpio.unprovisionPin(pin2);
         gpio.unprovisionPin(pin3);
