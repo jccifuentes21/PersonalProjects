@@ -12,21 +12,33 @@ public class ledController {
 
     @RequestMapping("/")
     public String greeting() {
-        return " Hello World";
+        return " APp is up and running";
     }
 
-    @RequestMapping("/light")
-    public String light(){
+    @RequestMapping("/blink")
+    public String light() throws InterruptedException {
 
-        if (pin==null) {
-            GpioController gpio = GpioFactory.getInstance();
-            GpioPinDigitalOutput pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_04, "RedLed", PinState.LOW);
+        GpioController gpio = GpioFactory.getInstance();
 
-        }
+        final GpioPinDigitalOutput pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_04, "Led4", PinState.HIGH);
 
-        pin.toggle();
+        Thread.sleep(1000);
+        pin.low();
+        Thread.sleep(1000);
+        pin.high();
+        Thread.sleep(1000);
+        pin.low();
+        Thread.sleep(500);
+        pin.high();
+        Thread.sleep(500);
+        pin.low();
+        Thread.sleep(500);
+        pin.high();
+        Thread.sleep(500);
+        pin.low();
 
-        return "You're good";
+        return "program was executed without errors";
+
     }
 
 }
