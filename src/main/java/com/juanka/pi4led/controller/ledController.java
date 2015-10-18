@@ -15,30 +15,43 @@ public class ledController {
         return " APp is up and running";
     }
 
-    public static void right (GpioPinDigitalOutput a, GpioPinDigitalOutput b, GpioPinDigitalOutput c, GpioPinDigitalOutput d, GpioPinDigitalOutput e, GpioPinDigitalOutput f) throws InterruptedException {
+    public static void right (GpioPinDigitalOutput a, GpioPinDigitalOutput b, GpioPinDigitalOutput c, GpioPinDigitalOutput d, GpioPinDigitalOutput e) throws InterruptedException {
 
         a.high();
-        Thread.sleep(100);
+        Thread.sleep(600);
         a.low();
         b.high();
-        Thread.sleep(100);
+        Thread.sleep(400);
         b.low();
         c.high();
-        Thread.sleep(100);
+        Thread.sleep(400);
         c.low();
         d.high();
-        Thread.sleep(100);
+        Thread.sleep(400);
         d.low();
         e.high();
-        Thread.sleep(100);
+        Thread.sleep(600);
         e.low();
-        f.high();
-        Thread.sleep(100);
-        f.low();
+
     }
 
-    public static void left (GpioPinDigitalOutput a, GpioPinDigitalOutput b, GpioPinDigitalOutput c, GpioPinDigitalOutput d, GpioPinDigitalOutput e, GpioPinDigitalOutput f) {
+    public static void left (GpioPinDigitalOutput a, GpioPinDigitalOutput b, GpioPinDigitalOutput c, GpioPinDigitalOutput d, GpioPinDigitalOutput e) throws InterruptedException {
 
+        e.high();
+        Thread.sleep(600);
+        e.low();
+        d.high();
+        Thread.sleep(400);
+        d.low();
+        c.high();
+        Thread.sleep(400);
+        c.low();
+        b.high();
+        Thread.sleep(400);
+        b.low();
+        a.high();
+        Thread.sleep(600);
+        a.low();
 
     }
 
@@ -49,25 +62,29 @@ public class ledController {
     @RequestMapping("/blink")
     public String light() throws InterruptedException {
 
+        int i=0;
         GpioController gpio = GpioFactory.getInstance();
 
-        final GpioPinDigitalOutput pin1 = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_00, "Led1", PinState.LOW);
-        final GpioPinDigitalOutput pin2 = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_02, "Led2", PinState.LOW);
-        final GpioPinDigitalOutput pin3 = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_03, "Led3", PinState.LOW);
-        final GpioPinDigitalOutput pin4 = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_04, "Led4", PinState.LOW);
-        final GpioPinDigitalOutput pin5 = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_05, "Led5", PinState.LOW);
-        final GpioPinDigitalOutput pin6 = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_06, "Led6", PinState.LOW);
+        final GpioPinDigitalOutput pin1 = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_02, "Led2", PinState.LOW);
+        final GpioPinDigitalOutput pin2 = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_03, "Led3", PinState.LOW);
+        final GpioPinDigitalOutput pin3 = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_04, "Led4", PinState.LOW);
+        final GpioPinDigitalOutput pin4 = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_05, "Led5", PinState.LOW);
+        final GpioPinDigitalOutput pin5 = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_06, "Led6", PinState.LOW);
 
-        right(pin1,pin2,pin3,pin4,pin5,pin6);
+        while (i<=5){
 
+            right(pin1, pin2, pin3, pin4, pin5);
+            left(pin1, pin2, pin3, pin4, pin5);
+
+            i++;
+        }
         gpio.shutdown();
         gpio.unprovisionPin(pin1);
         gpio.unprovisionPin(pin2);
         gpio.unprovisionPin(pin3);
         gpio.unprovisionPin(pin4);
         gpio.unprovisionPin(pin5);
-        gpio.unprovisionPin(pin6);
-        
+
         return "program was executed without errors";
 
     }
